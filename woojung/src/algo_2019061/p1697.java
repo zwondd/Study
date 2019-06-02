@@ -3,6 +3,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+/**
+ * 2019-06-01
+ * @author wj.kim
+ * 알고리즘: BFS
+ * 숨바꼭질
+ *
+ */
 public class p1697 {
 
 	static final int MAX=100000;
