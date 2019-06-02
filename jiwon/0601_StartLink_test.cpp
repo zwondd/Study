@@ -30,6 +30,7 @@ int bfs()
 
         if(cur==G)
         {
+            cout<<cnt<<endl;
             break;
         }
 
@@ -60,11 +61,13 @@ int bfs()
         }
     }
     
-    if(cur==G)
-        return cnt;
-    else
-        return -1;
-    
+    // if(cur==G)
+    //     return cnt;
+    // else
+    //     return -1;
+    if(cur!=G)
+        cout<<"use the stairs"<<endl;
+
 }
 
 int main(void)
@@ -72,10 +75,10 @@ int main(void)
     int res;
     cin>>F>>S>>G>>U>>D;
     res=bfs();
-    if(res==-1)
-        cout<<"use the stairs";
-    else
-        cout<<res;
+    // if(res==-1)
+    //     cout<<"use the stairs";
+    // else
+    //     cout<<res;
 
     return 0;
 }
