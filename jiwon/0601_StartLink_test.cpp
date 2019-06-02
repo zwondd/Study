@@ -26,7 +26,7 @@ int bfs()
         cnt=q.front();
         q.pop();
         visited[cur]=1;
-        cout<<cur<<" "<<cnt<<endl;
+        // cout<<cur<<" "<<cnt<<endl;
 
         if(cur==G)
         {
@@ -38,12 +38,12 @@ int bfs()
             // cout<<cur+U<<"  ***"<<endl;
             q.push(cur+U);
             q.push(cnt+1);
-            if(cur+U==G)
-            {
-                cur+=U;
-                cnt+=1;
-                break;
-            }
+            // if(cur+U==G)
+            // {
+            //     cur+=U;
+            //     cnt+=1;
+            //     break;
+            // }
         }
 
         if(cur-D>=1 && cur-D<=F && !visited[cur-D])
@@ -51,12 +51,12 @@ int bfs()
             // cout<<cur-D<<"  ***"<<endl;
             q.push(cur-D);
             q.push(cnt+1);
-            if(cur-D==G)
-            {
-                cur-=D;
-                cnt+=1;
-                break;
-            }
+            // if(cur-D==G)
+            // {
+            //     cur-=D;
+            //     cnt+=1;
+            //     break;
+            // }
         }
     }
     
