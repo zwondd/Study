@@ -3,6 +3,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+/**
+ * 2019-06-01
+ * @author wj.kim
+ * 알고리즘: BFS
+ * 미로탐색 
+ * 
+ */
 public class p2178 {
 	static int N;
 	static int M;
