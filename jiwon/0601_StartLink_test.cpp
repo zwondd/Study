@@ -25,7 +25,7 @@ int bfs()
         q.pop();
         cnt=q.front();
         q.pop();
-        visited[cur]=1;
+        // visited[cur]=1;
         // cout<<cur<<" "<<cnt<<endl;
 
         if(cur==G)
@@ -39,6 +39,7 @@ int bfs()
             // cout<<cur+U<<"  ***"<<endl;
             q.push(cur+U);
             q.push(cnt+1);
+            visited[cur+U]=1;
             // if(cur+U==G)
             // {
             //     cur+=U;
@@ -52,6 +53,8 @@ int bfs()
             // cout<<cur-D<<"  ***"<<endl;
             q.push(cur-D);
             q.push(cnt+1);
+            visited[cur-D]=1;
+
             // if(cur-D==G)
             // {
             //     cur-=D;
@@ -67,7 +70,6 @@ int bfs()
     //     return -1;
     if(cur!=G)
         cout<<"use the stairs"<<endl;
-
 }
 
 int main(void)
