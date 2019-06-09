@@ -1,5 +1,6 @@
 // 19.06.09
 // 백준 #1012 : 유기농 배추
+// DFS 방식
 
 #include <iostream>
 using namespace std;
