@@ -2,6 +2,13 @@ package algo_2019054;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author wj.kim
+ * 알고리즘: DFS
+ * 단지번호 붙이기 
+ * 
+ */
 public class p2667 {
 	
 	static int N;

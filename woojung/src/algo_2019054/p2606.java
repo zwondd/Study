@@ -1,6 +1,12 @@
 package algo_2019054;
 import java.util.Scanner;
-
+/**
+ * 
+ * @author wj.kim
+ * 알고리즘: DFS
+ * 바이러스
+ * 
+ */
 public class p2606 {
 	static int N;
 	static int T;
