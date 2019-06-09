@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 int T, n;
@@ -6,22 +7,22 @@ int stu[100001];
 bool visited[100001];
 bool team[100001];
 int memCnt;
-int rslt[999];
+
 
 void DFS(int n) {
 	
 	visited[n] = true; 
 	
 	int next = stu[n];
-	cout << "start : " << n << " next : " << next << endl;
+	//cout << "start : " << n << " next : " << next << endl;
 	if (visited[next]) { 
 		if (!team[next]) {
 			for (int i = next; i != n; i = stu[i]) {
 				memCnt++;
-				cout << "Cnt : " << memCnt << endl;
+				//cout << "Cnt : " << memCnt << endl;
 			}
 			memCnt++;
-			cout << memCnt << endl;
+			//cout << memCnt << endl;
 		}
 	}
 	else {
@@ -49,12 +50,10 @@ int main() {
 				DFS(i);
 			}
 		}
-
-		rslt[i] = n - memCnt;
+		cout << n - memCnt  << '\n';
+		
 		
 	}
-	for (int j = 0; j < T; j++) {
-		cout << rslt[j] << '\n';
-	}
+	
 }
 
