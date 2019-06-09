@@ -25,9 +25,11 @@ void input()
         for(int j=0; j<N; j++)
         {
             cin>>map[i][j];
-            maxHeight=(maxHeight<map[i][j]) ? map[i][j] : maxHeight; 
+            
+            maxHeight = (maxHeight<map[i][j]) ? map[i][j] : maxHeight; 
         }
     }
+    // cout<<"max height : "<<maxHeight<<endl;
 }
 
 void init()
@@ -82,7 +84,7 @@ int main(void)
     int tmp;
     input();
 
-    for(int i=1; i<=maxHeight; i++)
+    for(int i=0; i<=maxHeight; i++)
     {
         init();
         floodHeight=i;
