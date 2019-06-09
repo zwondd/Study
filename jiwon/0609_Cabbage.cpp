@@ -1,5 +1,4 @@
 // 19.06.09
-// 제한시간 : 1시간
 // 백준 #1012 : 유기농 배추
 
 #include <iostream>
@@ -51,7 +50,7 @@ void dfs(int x, int y)
         nx=x+dx[i];
         ny=y+dy[i];
 
-        if(nx>=0 && nx<N && ny>=0 && ny<M && map[nx][ny] && !visited[nx][ny])
+        if(nx>=0 && nx<M && ny>=0 && ny<N && map[nx][ny] && !visited[nx][ny])
         {
             dfs(nx,ny);
         }
@@ -67,9 +66,9 @@ int main(void)
     {
         init();
         input();
-        for(int j=0; j<N; j++)
+        for(int j=0; j<M; j++)
         {
-            for(int k=0; k<M; k++)
+            for(int k=0; k<N; k++)
             {
                 if(map[j][k] && !visited[j][k])
                 {
