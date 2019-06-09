@@ -10,65 +10,52 @@ const int MAX=100;
 int map[MAX+1][MAX+1]={0,};
 int visited[MAX+1][MAX+1]={0,};
 
-int height[101]={0,};
 int floodHeight;
 int maxHeight=0;
+int minHeight=9999;
 
 int dx[]={-1,0,1,0};
 int dy[]={0,1,0,-1};
 
-void input()
-{
+void input() {
     cin>>N;
-    for(int i=0; i<N; i++)
-    {
-        for(int j=0; j<N; j++)
-        {
+    for(int i=0; i<N; i++) {
+        for(int j=0; j<N; j++) {
             cin>>map[i][j];
-            
+            minHeight = (minHeight>map[i][j]) ? map[i][j] : minHeight;
             maxHeight = (maxHeight<map[i][j]) ? map[i][j] : maxHeight; 
         }
     }
     // cout<<"max height : "<<maxHeight<<endl;
 }
 
-void init()
-{
-    for(int i=0; i<N; i++)
-    {
-        for(int j=0; j<N; j++)
-        {
+void init() {
+    for(int i=0; i<N; i++) {
+        for(int j=0; j<N; j++) {
             visited[i][j]=0;
         }
     }
 }
 
-void dfs(int x, int y)
-{
+void dfs(int x, int y) {
     int nx,ny;
     visited[x][y]=1;
 
-    for(int i=0; i<4; i++)
-    {
+    for(int i=0; i<4; i++) {
         nx=x+dx[i];
         ny=y+dy[i];
 
-        if( nx>=0 && nx<N && ny>=0 && ny<N && !visited[nx][ny] && map[nx][ny]>floodHeight)
-        {
+        if( nx>=0 && nx<N && ny>=0 && ny<N && !visited[nx][ny] && map[nx][ny]>floodHeight) {
             dfs(nx,ny);
         }
     }
 }
 
-int solve()
-{
+int solve() {
     int cnt=0;
-    for(int i=0; i<N; i++)
-    {
-        for(int j=0; j<N ;j++)
-        {
-            if( !visited[i][j] && map[i][j]>floodHeight )
-            {
+    for(int i=0; i<N; i++) {
+        for(int j=0; j<N ;j++) {
+            if( !visited[i][j] && map[i][j]>floodHeight ) {
                 cnt++;
                 dfs(i,j); 
             }
@@ -78,39 +65,17 @@ int solve()
     return cnt;
 }
 
-int main(void)
-{
+int main(void) {
     int maxTerritroy=0;
     int tmp;
     input();
 
-    for(int i=0; i<=maxHeight; i++)
-    {
+    for(int h=minHeight; h<=maxHeight; h++) {
         init();
-        floodHeight=i;
-        height[floodHeight]=1;
-        // cout<<"height : "<<floodHeight<<endl;
+        floodHeight=h;
         tmp=solve();
         maxTerritroy=( maxTerritroy < tmp ) ? tmp : maxTerritroy;
     }
-
-
-    // for(int i=0; i<N; i++)
-    // {
-    //     for(int j=0; j<N; j++)
-    //     {
-    //         if( !height[map[i][j]] )
-    //         {
-    //             init();
-    //             floodHeight=map[i][j];
-    //             height[map[i][j]]=1;
-    //             cout<<"height : "<<map[i][j]<<endl;
-    //             tmp=solve();
-    //             maxTerritroy=( maxTerritroy < tmp ) ? tmp : maxTerritroy;
-    //         }
-    //     }
-    // }
-    cout<<maxTerritroy;
 
     return 0;
 }
