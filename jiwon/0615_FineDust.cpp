@@ -17,7 +17,7 @@ int air_up[2];
 
 void diffusion()
 {
-    cout<<"diffusion"<<endl;
+    // cout<<"diffusion"<<endl;
     queue<int> q;
 
     for(int i=0; i<R; i++)
@@ -72,6 +72,7 @@ void diffusion()
     }
 
 
+    // map print
     // cout<<" map_new "<<endl;
     // for(int i=0; i<R; i++)
     // {
@@ -88,78 +89,90 @@ void diffusion()
 void airCleaning()
 {
     // ---------------------------
-    cout<<"air cleaning"<<endl;
+    // cout<<"air cleaning"<<endl;
     int flag=0;
-    int nx,ny;
+    int x, y, nx, ny;
+    int tmp_cur, tmp_next;
+
     int dx[]={0,-1,0,1};
     int dy[]={1,0,-1,0};
 
-    int x=air_up[0]+dx[flag];
-    int y=air_up[1]+dy[flag];
-    int tmp=map_new[x][y];
+    x=air_up[0]+dx[flag];
+    y=air_up[1]+dy[flag];
+    tmp_cur=map_new[x][y];
+    map_new[x][y]=0;
 
     // upper air cleaning
-    while (map_new[x][y]!=-1)
-    {
+    while ( true ) {
         nx=x+dx[flag];
         ny=y+dy[flag];
-        cout<<"nx : "<<nx<<" ny: "<<ny<<endl;
+        // cout<<"up nx : "<<nx<<" ny: "<<ny<<endl;
 
-        if( nx>=0 && nx<R && ny>=0 && ny<C && map_new[nx][ny]!=-1 )
-        {
-            tmp=map_new[nx][ny];
-            map_new[nx][ny]=map_new[x][y];
+        if ( nx==air_up[0] && ny==air_up[1] ) {
+            break;
+        }
 
+        tmp_next=map_new[nx][ny];
 
-
-            map_new[nx][ny]=map[x][y];
-            tmp=map_new[x][y];
+        if( nx>=0 && nx<R && ny>=0 && ny<C && map_new[nx][ny]!=-1 ) {
+            map_new[nx][ny]=tmp_cur;
+            tmp_cur=tmp_next;
+            
             x=nx;
             y=ny;
-        }
-        else
-        {
+        } else {
             flag=(flag+1)%4;
         }
     }
 
     // bottom air cleaning
-    x=air_up[0]-1;
-    y=air_up[1];
-    flag=3;
+    flag=0;
+    x=air_up[0] + 1 + dx[flag];
+    y=air_up[1] + dy[flag];
+    tmp_cur=map_new[x][y];
+    map_new[x][y]=0;
 
-    while (map_new[x][y]!=-1)
-    {
+    while ( true ) {
         nx=x+dx[flag];
         ny=y+dy[flag];
-        cout<<"nx : "<<nx<<" ny: "<<ny<<endl;
+        // cout<<"bottom nx : "<<nx<<" ny: "<<ny<<endl;
 
-
-        if( nx>=0 && nx<R && ny>=0 && ny<C && map_new[nx][ny]!=-1 )
-        {
-            tmp=map_new[nx][ny];
-            map_new[nx][ny]=map[x][y];
+        if ( nx==air_up[0]+1 && ny==air_up[1] ) {
+            break;
         }
-        else
-        {
-            flag=(flag+1)%4;
+
+        tmp_next=map_new[nx][ny];
+
+        if( nx>=0 && nx<R && ny>=0 && ny<C && map_new[nx][ny]!=-1 ) {
+            map_new[nx][ny]=tmp_cur;
+            tmp_cur=tmp_next;
+            
+            x=nx;
+            y=ny;
+        } else {
+            flag=(flag+3)%4;
         }
     }
+
+    // map print
+    // cout<<"air cleaning map_new "<<endl;
+    // for(int i=0; i<R; i++)
+    // {
+    //     for(int j=0; j<C; j++)
+    //     {
+    //         cout<<map_new[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
 }
 
 int getTotal()
 {
-    cout<<"get total"<<endl;
-    for(int i=0; i<R; i++)
-    {
-        for(int j=0; j<C; j++)
-        {
-            if(map_new[i][j]!=-1)
-                total+=map_new[i][j];
-            else if(map_new[i+1][j]==-1)
-                total-=map_new[i-1][j];
-            else
-                total-=map_new[i+1][j];
+    // cout<<"get total"<<endl;
+    for(int i=0; i<R; i++) {
+        for(int j=0; j<C; j++) {
+            if(map[i][j]!=-1)
+                total+=map[i][j];
         }
     }
 }
@@ -167,21 +180,22 @@ int getTotal()
 int main(void)
 {
     cin>>R>>C>>T;
-    for(int i=0; i<R; i++)
-    {
-        for(int j=0; j<C; j++)
-        {
+    for(int i=0; i<R; i++) {
+        for(int j=0; j<C; j++) {
             cin>>map[i][j];
             map_new[i][j] = map[i][j];
         }
     }
 
-    
-
-    for(int i=0; i<T; i++)
-    {
+    for(int i=0; i<T; i++) {
         diffusion();
         airCleaning();
+        for(int i=0; i<R; i++) {
+            for(int j=0; j<C; j++) {
+                map[i][j]=map_new[i][j];
+                map_new[i][j]=0;
+            }
+        }
     }
     getTotal();
     cout<<total<<endl;
