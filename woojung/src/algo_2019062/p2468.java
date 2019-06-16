@@ -52,12 +52,16 @@ public class p2468 {
 
 	
 	private static void init() {
-		for(int i=1;i<N+1;i++) {
+/*		for(int i=1;i<N+1;i++) {
 			for(int j=1;j<N+1;j++) {
 				visited[i][j]= 0;
 			}	
 		}
-		
+*/		
+		for(int i=1;i<N+1;i++) {
+			//배열 초기화
+			Arrays.fill(visited[i], 0);
+		}
 	}
 
 
