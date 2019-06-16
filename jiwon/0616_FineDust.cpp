@@ -15,34 +15,37 @@ int total=0;
 
 int air_up[2];
 
-void diffusion()
-{
+void printMap() {
+    cout<<" map_new "<<endl;
+    for(int i=0; i<R; i++) {
+        for(int j=0; j<C; j++) {
+            cout<<map_new[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+void diffusion() {
     // cout<<"diffusion"<<endl;
     queue<int> q;
 
-    for(int i=0; i<R; i++)
-    {
-        for(int j=0; j<C; j++)
-        {
-            if( map[i][j] != 0 && map[i][j] != -1 )
-            {
+    for(int i=0; i<R; i++) {
+        for(int j=0; j<C; j++) {
+            if( map[i][j] != 0 && map[i][j] != -1 ) {
                 int tmp = map[i][j]/5;
                 q.push(i);
                 q.push(j);
                 q.push(tmp);
             }
-
-            if( map[i][j]==-1 && map[i+1][j]==-1)
-            {
+            if( map[i][j]==-1 && map[i+1][j]==-1 ) {
                 air_up[0]=i;
                 air_up[1]=j;
             } 
         }
     }
 
-    while(!q.empty())
-    {
-        int x,y,amount;
+    while(!q.empty()) {
+        int x, y, amount;
         int cnt=0;
         int dx[]={-1,0,1,0};
         int dy[]={0,1,0,-1};
@@ -54,15 +57,11 @@ void diffusion()
         amount=q.front();
         q.pop();
 
-    
-
-        for(int i=0; i<4; i++)
-        {
+        for(int i=0; i<4; i++) {
             int nx=x+dx[i];
             int ny=y+dy[i];
 
-            if(nx>=0 && nx<R && ny>=0 && ny<C && map[nx][ny]!=-1)
-            {
+            if(nx>=0 && nx<R && ny>=0 && ny<C && map[nx][ny]!=-1) {
                 map_new[nx][ny]+=amount;
                 cnt++;
             }
@@ -70,25 +69,9 @@ void diffusion()
 
         map_new[x][y]=map_new[x][y]-(amount*cnt);
     }
-
-
-    // map print
-    // cout<<" map_new "<<endl;
-    // for(int i=0; i<R; i++)
-    // {
-    //     for(int j=0; j<C; j++)
-    //     {
-    //         cout<<map_new[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
-
-   
 }
 
-void airCleaning()
-{
-    // ---------------------------
+void airCleaning() {
     // cout<<"air cleaning"<<endl;
     int flag=0;
     int x, y, nx, ny;
@@ -117,7 +100,6 @@ void airCleaning()
         if( nx>=0 && nx<R && ny>=0 && ny<C && map_new[nx][ny]!=-1 ) {
             map_new[nx][ny]=tmp_cur;
             tmp_cur=tmp_next;
-            
             x=nx;
             y=ny;
         } else {
@@ -146,24 +128,12 @@ void airCleaning()
         if( nx>=0 && nx<R && ny>=0 && ny<C && map_new[nx][ny]!=-1 ) {
             map_new[nx][ny]=tmp_cur;
             tmp_cur=tmp_next;
-            
             x=nx;
             y=ny;
         } else {
             flag=(flag+3)%4;
         }
     }
-
-    // map print
-    // cout<<"air cleaning map_new "<<endl;
-    // for(int i=0; i<R; i++)
-    // {
-    //     for(int j=0; j<C; j++)
-    //     {
-    //         cout<<map_new[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
 }
 
 int getTotal()
@@ -193,7 +163,6 @@ int main(void)
         for(int i=0; i<R; i++) {
             for(int j=0; j<C; j++) {
                 map[i][j]=map_new[i][j];
-                map_new[i][j]=0;
             }
         }
     }
