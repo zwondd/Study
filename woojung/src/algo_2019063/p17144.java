@@ -53,7 +53,8 @@ public class p17144 {
 				result+=map[i][j];
 			}
 		}
-		System.out.println((result+2));
+		int result2=result+2;
+		System.out.println((result2));
 	}
 	
 	public static void diffusion() {
